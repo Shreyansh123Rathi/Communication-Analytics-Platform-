@@ -8,12 +8,17 @@ plt.rcParams['font.family'] = 'Segoe UI Emoji'  #helps to read emojis
 
 st.set_page_config(layout="wide")  #To keep alignment proper
 import preprocessor,helper
+import sentiments
 
 import matplotlib.pyplot as plt
+
+
 #1 Creating to choose a file
 
 st.sidebar.title('WhatsApp Chat Analysis')
 uploaded_file = st.sidebar.file_uploader("Choose a file")
+st.sidebar.info(" Please upload the exported WhatsApp chat file (.txt format)")
+
 if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue() #a.to read in bytes
     data = bytes_data.decode("utf-8") #b.To read file in string
@@ -143,3 +148,51 @@ if uploaded_file is not None:
 
             ax.set_title("Top Emojis")
             st.pyplot(fig)
+
+
+
+#II --- SENTIMENT ANALYSIS ---
+        st.title("Sentiment Analysis")
+
+        # Apply sentiment analysis to the filtered dataframe
+        sentiment_df = sentiments.sentiment_analysis(df.copy())  # Use .copy() to avoid warnings
+
+        # Create two columns
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.header("Overall Sentiment")
+            # Create a pie chart of sentiment distribution
+            sentiment_counts = sentiment_df['sentiment_label'].value_counts()
+            fig, ax = plt.subplots()
+            ax.pie(sentiment_counts, labels=sentiment_counts.index, autopct="%0.2f",
+                   colors=['#2ecc71', '#e74c3c', '#3498db'])
+            st.pyplot(fig)
+
+        with col2:
+            st.header("Most Positive Message")
+            # Find and display the most positive message
+            most_positive_msg = sentiment_df.loc[sentiment_df['sentiment_compound'].idxmax()]
+            st.info(f"**User:** {most_positive_msg['user']}")
+            st.write(f"**Message:** {most_positive_msg['message']}")
+            st.write(f"**Score:** {most_positive_msg['sentiment_compound']:.2f}")
+
+        st.header("Most Negative Message")
+        # Find and display the most negative message
+        most_negative_msg = sentiment_df.loc[sentiment_df['sentiment_compound'].idxmin()]
+        st.error(f"**User:** {most_negative_msg['user']}")
+        st.write(f"**Message:** {most_negative_msg['message']}")
+        st.write(f"**Score:** {most_negative_msg['sentiment_compound']:.2f}")
+
+        # --- TOPIC MODELING ---
+        st.title("Discovered Chat Topics")
+
+        # Call the helper function to get the topics
+        chat_topics = sentiments.find_topics(df)
+
+        # Display each topic
+        if chat_topics:
+            for topic in chat_topics:
+                st.subheader(topic)
+        else:
+            st.write("Not enough data to determine topics.")
