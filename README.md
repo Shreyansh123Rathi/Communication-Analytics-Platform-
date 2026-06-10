@@ -109,9 +109,9 @@ Communication-Analytics-Platform
 
 ### Shreyansh Rathi
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/Shreyansh123Rathi
 
-LinkedIn: https://linkedin.com/in/yourprofile
+LinkedIn: https://www.linkedin.com/in/shreyanshrathi1/
 
 ---
 
