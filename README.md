@@ -100,7 +100,6 @@ Communication-Analytics-Platform
 - Developed an end-to-end analytics platform for WhatsApp chat data using Python and Streamlit.
 - Built NLP pipelines for sentiment analysis, topic modeling, and communication pattern discovery.
 - Designed interactive dashboards featuring timelines, heatmaps, word clouds, and user engagement metrics.
-- Implemented Latent Dirichlet Allocation (LDA) for automatic conversation topic extraction.
 - Performed sentiment classification and behavioral analytics on thousands of chat messages.
 
 ---
