@@ -8,7 +8,7 @@
 Built an end-to-end communication analytics solution that converts **thousands and lakhs** of raw WhatsApp chat logs into structured business intelligence. The platform leverages Python, NLP, sentiment analysis, topic modeling, and statistical analytics to generate **20+ actionable insights**, helping users understand engagement trends, conversation themes, and user interaction patterns.
 
 ### Live Demo
-https://your-streamlit-link.streamlit.app/
+https://analysing-whatsapp-chats.streamlit.app/
 
 ---
 
